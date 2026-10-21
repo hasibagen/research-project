@@ -1,0 +1,42 @@
+# 数据／运行产物：实际路径变更时同步；需入仓的小型示例另作明确例外
+/data/
+/naming/
+/results/
+/result/
+/outputs/
+/output/
+# 兼容旧临时目录的排除项，不授权创建；新运行临时文件归 run/tmp/
+/scratch/
+/tmp/
+/temp/
+/quarantine/
+/待清理_*/
+# 环境、缓存、构建
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+node_modules/
+build/
+dist/
+*.egg-info/
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+Thumbs.db
+# 密钥与本地配置；环境说明与不含秘密的配置模板应保留
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+# 机器日志不入仓；LOG.md 与计划 backup 历史文档应保留
+*.log
+*.tmp
+*.swp
+# 大于 5,000,000 字节的文件用检查器发现，再添加具体路径。
+# Git ignore 无大小规则；不要以扩展名替代检查。

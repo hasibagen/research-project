@@ -1,0 +1,19 @@
+from pathlib import Path
+import sys
+ROOT = str(Path(config['run_root']).resolve())
+SCRIPT = str(Path(workflow.basedir) / 'demo.py')
+PYTHON = sys.executable
+rule all:
+    input: ROOT + '/record.json'
+rule data:
+    output: ROOT + '/data.json'
+    shell: '{PYTHON:q} {SCRIPT:q} data --root {ROOT:q}'
+rule analyze:
+    input: ROOT + '/data.json'
+    output: ROOT + '/{combo}.json'
+    wildcard_constraints: combo='majority|threshold'
+    shell: '{PYTHON:q} {SCRIPT:q} analyze --root {ROOT:q} --combo {wildcards.combo:q}'
+rule record:
+    input: ROOT + '/majority.json', ROOT + '/threshold.json'
+    output: ROOT + '/record.json'
+    shell: '{PYTHON:q} {SCRIPT:q} record --root {ROOT:q}'
